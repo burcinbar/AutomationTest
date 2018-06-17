@@ -1,0 +1,6 @@
+com/android/test/server/AppiumServer.class
+com/android/test/base/AndroidBase.class
+com/android/test/base/AbstractBase.class
+com/android/test/stepdefs/Hooks.class
+com/android/test/driver/AndroidDriverUtils.class
+com/android/test/RunCukesTest.class
