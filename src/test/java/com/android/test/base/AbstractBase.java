@@ -3,7 +3,6 @@ package com.android.test.base;
 
 import cucumber.api.Scenario;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
@@ -45,10 +44,18 @@ public abstract class AbstractBase {
         }
     }
 
+    private void sleep(int n) {
+
+        try {
+            Thread.sleep(n);
+        } catch (Exception e) {
+        }
+    }
+
     public boolean isElementPresent(String element){
         try {
             setWaitTime(1);
-            getDriver().findElements(MobileBy.id(element));
+            getDriver().findElementById(element);
             return true;
 
         } catch (NoSuchElementException e){
@@ -73,8 +80,21 @@ public abstract class AbstractBase {
         Dimension size = getDriver().manage().window().getSize();
         int startx = (int)(size.width * 0.90);
         int endx = (int)(size.width * 0.10);
-        int starty = size.height / 2;
+        int starty = size.height / 3;
         getDriver().swipe(startx, starty, endx, starty, 1000);
+    }
+
+    public void swipeLeft(int times) {
+
+        Dimension size = getDriver().manage().window().getSize();
+        int startx = (int) (size.width * 0.90);
+        int endx = (int) (size.width * 0.10);
+        int starty = size.height / 3;
+
+        for (int i = 0; i < times; i++) {
+            getDriver().swipe(startx, starty, endx, starty, 1000);
+        }
+
     }
 
     public void swipeRight(){
@@ -101,4 +121,9 @@ public abstract class AbstractBase {
         getDriver().swipe(startx, starty, starty, endy,1000);
     }
 
+    public void waitForId(String text) {
+        while (!isElementPresent(text)) {
+            sleep(5000);
+        }
+    }
 }
