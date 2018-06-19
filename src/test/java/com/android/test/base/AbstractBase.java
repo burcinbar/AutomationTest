@@ -92,7 +92,8 @@ public abstract class AbstractBase {
         int starty = size.height / 3;
 
         for (int i = 0; i < times; i++) {
-            getDriver().swipe(startx, starty, endx, starty, 1000);
+            getDriver().swipe(startx, starty, endx, starty, 800);
+            sleep(300);
         }
 
     }
@@ -121,9 +122,20 @@ public abstract class AbstractBase {
         getDriver().swipe(startx, starty, starty, endy,1000);
     }
 
-    public void waitForId(String text) {
+    public void waitForIdAtStartup(String text) {
+        sleep(3000);
         while (!isElementPresent(text)) {
-            sleep(5000);
+            sleep(2000);
+        }
+    }
+
+
+
+    public void useNumPad(CharSequence charSequence){
+        for (int i=0; i < charSequence.length();i++){
+
+            String b = String.valueOf((char) (charSequence.charAt(i)+7));
+            driver.getKeyboard().sendKeys(b);
         }
     }
 }
